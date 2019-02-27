@@ -1,0 +1,34 @@
+<div class="page-header header-filter" data-parallax="true" *ngIf="event">
+  <img src={{event.logo.original.url}} width="100%" alt="flayer">
+</div>
+<div class="main main-raised" *ngIf="event">
+  <div class="profile-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto">
+          <div class="profile">
+            <div class="name">
+              <h3 class="title">{{event.name.text}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="description text-center col-md-7">
+          <h4 style="color:#888;">Description : </h4>
+          <p>{{event.description.text}}</p>
+        </div>
+        <div class="col-md-4 ml-1">
+          <h5 style="color:#888;">Date et heure : </h5>
+          <p>Du {{event.start.local | date: "fullDate" : event.start.timezone : 'fr-FR'}} à {{event.start.local | date: "shortTime" : event.start.timezone : 'fr-FR'}}<br>
+          Au {{event.end.local | date: "fullDate" : event.end.timezone : 'fr-FR'}} à {{event.end.local | date: "shortTime" : event.end.timezone : 'fr-FR'}}</p>
+          <div>
+            <span class="badge badge-pill badge-secondary">{{categorie}}</span>
+            <span class="badge badge-pill badge-secondary">{{subCategorie}}</span>
+          </div>
+          <a href={{event.url}} target="_blank">Site officiel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

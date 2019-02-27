@@ -1,0 +1,70 @@
+<ng-sidebar-container style="height:80vh;">
+ 
+    <!-- A sidebar -->
+    <ng-sidebar showBackdrop='true' closeOnClickOutside='true' mode='slide' [(opened)]="_opened">
+      <div class="pl-5 pr-5 pt-2 content-side">
+        <h4 class="text-center">Filtres</h4>
+        <div class="form-group  mt-5">
+          <label for="search">Recherche par mot clés</label>
+          <input type="text" 
+                 id="search" 
+                 class="form-control form-control-sm" 
+                 placeholder="Recherche..." 
+                 [(ngModel)]="keysName">
+        </div>
+        <div class="form-group  mt-5">
+          <label for="city">Ville</label>
+          <input type="text" 
+                 id="city" 
+                 class="form-control form-control-sm" 
+                 [(ngModel)]="cityName">
+        </div>
+        <div class="form-group" *ngIf="categories">
+          <select class="custom-select custom-select-sm" 
+                  (change)="filter()"
+                  (change)="getSubCategories($event.target.value)"
+                  [(ngModel)]="categorieName">
+            <option disabled>Categories</option>
+            <hr>
+            <option *ngFor="let categorie of categories" 
+                    value={{categorie.id}}>
+              {{categorie.name}}
+            </option>
+            <option value="">Aucune</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="subCategories">
+          <select class="custom-select custom-select-sm" 
+                  (change)="filter()"
+                  [(ngModel)]="subCategoriesName">
+            <option disabled>Sub categories</option>
+            <hr>
+            <option *ngFor="let subcategorie of subCategories"
+                    value={{subcategorie.id}}>
+              {{subcategorie.name}}
+            </option>
+            <option value="">Aucune</option>
+          </select>
+        </div>
+        <button class="btn btn-outline-warning" 
+                (click)="filter()" 
+                (click)="_toggleSidebar()">
+          Trouver
+        </button>
+      </div>
+    </ng-sidebar>
+
+    <!-- Page content -->
+    <div ng-sidebar-content>
+      <button class="btn btn-outline-warning btn-sidebar mt-5 ml-1" (click)="_toggleSidebar()"><i class="	fa fa-search"></i></button>
+      <div class="container">
+          <!-- <input type="text" [(ngModel)]="searchText" (ngModelChange)="filterText()"> -->
+          <app-content [categories]="categories"
+                       [url]="url"
+                       [events]="events" 
+                       [location]="location" 
+                       [pagination]="pagination"></app-content>
+      </div>
+    </div>
+
+</ng-sidebar-container>

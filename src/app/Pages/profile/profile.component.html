@@ -1,0 +1,21 @@
+<div class="page-header header-filter" data-parallax="true" style="background-image:url('http://wallpapere.org/wp-content/uploads/2012/02/black-and-white-city-night.png');"></div>
+<div *ngIf="apiServices.info" class="main main-raised">
+  <div class="profile-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto">
+          <div class="profile">
+            <div class="avatar">
+              <img src={{apiServices.info.picture.data.url}} alt="Profile Image" class="img-raised rounded-circle img-fluid">
+            </div>
+            <div class="name">
+              <h3 class="title">{{apiServices.info.name}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="description text-center">
+        <p>Bonjours Mr {{apiServices.info.last_name}}.</p>
+      </div>
+  </div>
+</div>

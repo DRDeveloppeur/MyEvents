@@ -1,0 +1,106 @@
+<!-- <div class="row justify-content-center" *ngIf="events">
+  <div *ngFor="let event of events">
+    <div *ngIf="event.name.text && event.logo" class="card border-dark mb-3" style="max-height:25rem;">
+      <div class="card-header">
+        {{location.augmented_location.city}} du 
+        {{event.start.local | date: "medium" : event.start.timezone : 'fr-FR'}} au 
+        {{event.end.local | date : "medium" : event.start.timezone : 'fr-FR'}}
+        <div *ngFor="let categorie of categories">
+          <span class="badge badge-pill badge-secondary" 
+                *ngIf="categorie.id === event.category_id">
+            {{categorie.name}}
+          </span>
+        </div>
+      </div>
+      <h5 class="card-title">{{event.name.text}}</h5>
+      <div class="card-body" style="overflow:hidden;">
+        <div class="row">
+          <div class="img-fluid">
+            <img *ngIf="event.logo.url" 
+                  class="img-fluidimg-thumbnail" 
+                  src={{event.logo.url}} 
+                  alt="picture event"
+            >
+          </div>
+          <div style="max-width: 30rem;">
+            <p class="card-text ml-1"> {{event.description.text}} </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-warning float-right" type="submit">En savoir +</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- _________________________________________ -->
+
+<div class="row justify-content-center" *ngIf="events">
+  <div class="row justify-content-center"  
+       *ngFor="let event of events">
+    <div *ngIf="event.name.text && event.logo" style="width:22rem;" class="card mb-3 mr-5 ">
+      <h5 class="card-header">{{event.name.text}}</h5>
+      <img style="height: 200px; width: 100%; display: block;" 
+      src={{event.logo.url}} 
+      alt="image events">
+      <div class="card-body">
+        <p class="card-text" style="max-height:5rem; overflow: hidden;">{{event.description.text}}</p>
+      </div>
+      <div class="card-footer text-muted"> 
+        Du   
+        {{event.start.local | date: "fullDate" : event.start.timezone : 'fr-FR'}} au 
+        {{event.end.local | date : "fullDate" : event.start.timezone : 'fr-FR'}}
+      </div>
+      <button [routerLink]="['/event', event.id]" class="btn btn-warning float-right" type="submit">En savoir +</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Number Events -->
+<div class="row justify-content-center" *ngIf="pagination">
+  <p>{{pagination.object_count}} résultats trouver !</p>
+</div>
+
+
+<!-- Paginations -->
+<div class="row justify-content-center" *ngIf="pagination.page_count > 1">
+  <ul class="pagination pagination-sm">
+    <li class="page-item" [ngClass]="{ disabled : pagination.page_number <= 1 ? 'disabled' : ''}">
+      <a class="page-link" (click)="paginSwitch(pagination.page_number-1)">&laquo;</a>
+    </li>
+    <li class="page-item" *ngIf="pagination.page_number-2 >= 1">
+      <a class="page-link" (click)="paginSwitch(pagination.page_number-2)">
+        {{pagination.page_number-2}}</a>
+    </li>
+    <li class="page-item" *ngIf="pagination.page_number-1 >= 1">
+      <a class="page-link" (click)="paginSwitch(pagination.page_number-1)">
+        {{pagination.page_number-1}}</a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" >{{pagination.page_number}}</a>
+    </li>
+    <li class="page-item" *ngIf="pagination.page_number+1 <= pagination.page_count">
+      <a class="page-link" (click)="paginSwitch(pagination.page_number+1)">
+        {{pagination.page_number+1}}</a>
+    </li>
+    <li class="page-item" *ngIf="pagination.page_number+2 <= pagination.page_count">
+      <a class="page-link" (click)="paginSwitch(pagination.page_number+2)">
+        {{pagination.page_number+2}}</a>
+    </li>
+    <li class="page-item" 
+        [ngClass]="{ disabled : pagination.page_count <= pagination.page_number ? 'disabled' : ''}"
+        >
+      <a class="page-link"
+         (click)="paginSwitch(pagination.page_number+1)"
+         >
+         &raquo;
+      </a>
+    </li>
+  </ul>
+</div>
+
+<footer class="footer text-center position-bottom">
+    <p>My Events by Delianu Raul</p>
+</footer>
